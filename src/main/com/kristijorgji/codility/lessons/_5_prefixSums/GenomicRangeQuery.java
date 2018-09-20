@@ -40,6 +40,9 @@ public class GenomicRangeQuery {
         return result;
     }
 
+    /**
+     * 100% solution
+     */
     public int[] optimizedSolution(String S, int[] P, int[] Q)
     {
         final int M = P.length;

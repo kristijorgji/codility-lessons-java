@@ -1,4 +1,4 @@
-package com.kristijorgji.codility.lessons._6_sorting;
+package com.kristijorgji.codility.lessons._7_stackAndQueues;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NumberOfDiscIntersectionsTest {
-    private NumberOfDiscIntersections subjectUnderTest;
+public class StoneWallTest {
+    private StoneWall subjectUnderTest;
 
     @BeforeEach
     public void setUp() {
-        subjectUnderTest = new NumberOfDiscIntersections();
+        subjectUnderTest = new StoneWall();
     }
 
     @ParameterizedTest
@@ -24,20 +24,15 @@ public class NumberOfDiscIntersectionsTest {
         assertEquals(expectedSolution, result);
     }
 
-    @ParameterizedTest
-    @MethodSource("dataProvider")
-    public void testOptimizedSolution(final int[] A, final int expectedSolution) {
-        final int result = subjectUnderTest.optimizedSolution(A);
-        assertEquals(expectedSolution, result);
-    }
-
     private static Stream<Arguments> dataProvider() {
         return Stream.of(
                 Arguments.of(
                         new int[] {
-                                1, 5, 2, 1, 4, 0
+                                8, 8, 5,
+                                7, 9, 8,
+                                7, 4, 8
                         },
-                        11
+                        7
                 )
         );
     }
