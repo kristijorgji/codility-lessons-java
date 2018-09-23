@@ -38,6 +38,18 @@ public class NumberOfDiscIntersectionsTest {
                                 1, 5, 2, 1, 4, 0
                         },
                         11
+                ),
+                Arguments.of(
+                        new int[] {
+                                0, 0, 0
+                        },
+                        0
+                ),
+                Arguments.of(
+                        new int[] {
+                                0, 1
+                        },
+                        1
                 )
         );
     }
