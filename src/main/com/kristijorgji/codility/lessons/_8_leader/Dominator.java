@@ -7,6 +7,49 @@ import java.util.HashMap;
  */
 public class Dominator {
     /**
+     * 100% solution, O(N) time complexity, O(1) space complexity
+     * Check the lecture on Leader.pdf provided by Codility for the explanation
+     * Basically, if we remove pairs of different elements, the leader in the sequence
+     * will still be the same element
+     */
+    public int optimizedSolution(int[] A)
+    {
+        int candidate = -1;
+        int position = -1;
+        int stackCounter = 0;
+
+        for (int i = 0; i < A.length; i++) {
+            if (stackCounter == 0) {
+                candidate = A[i];
+                stackCounter++;
+                position = i;
+            } else {
+                if (A[i] == candidate) {
+                    stackCounter++;
+                } else {
+                    stackCounter--;
+                }
+            }
+        }
+
+        if (stackCounter == 0) {
+            return -1;
+        }
+
+        int freq = 0;
+        for (int value : A) {
+            if (value == candidate) {
+                ++freq;
+                if (freq > A.length / 2) {
+                    return position;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * 100% score solution with O(N) time complexity
      * But I am not satisfied with space complexity being worst case O(N)
      * Will resolve later with O(N) time, and O(1) space complexity
