@@ -46,24 +46,38 @@ package com.kristijorgji.codility.lessons._5_prefixSums;
  */
 public class PassingCars {
     /**
-     * TODO WIP
+     * https://app.codility.com/demo/results/trainingYU8AN7-U2T/
+     * 100% score
+     *
+     * The idea here is to use prefix sums in order to keep track of the
+     * amount of total zeros until each index.
+     *
+     * Knowing that the condition for a passing pair is:
+     * {
+     *     A[P] = 0
+     *     A[Q] = 1
+     *     0 <= Q < P < N
+     * }
+     *
+     * We are interested in  the total number of zeros found on the left of each one found.
+     * Foreach 1 found in [1, N-1], we add the count of zeros found in the interval [0, foundOnesPosition],
+     * as that is equal to the possible pairs meeting the conditions above
+     *
      */
     public int solution(int[] A)
     {
         final int N = A.length;
-        int[] prefixSums = new int[N + 1];
+        int[] zerosAtIndex = new int[N + 1];
         for (int i = 0; i < N; i++) {
-            prefixSums[i + 1] = A[i] + prefixSums[i];
+            zerosAtIndex[i + 1] = zerosAtIndex[i] + (A[i] == 0 ? 1 : 0);
         }
 
         long c = 0;
-        for (int i = 0; i < N - 1; i++) {
-            if (A[i] == (prefixSums[i + 2] - prefixSums[i + 1]) + 1) {
-                c++;
+        for (int i = 1; i < N; i++) {
+            if (A[i] == 1) {
+                c += zerosAtIndex[i];
             }
         }
-
-        c -= N * (N + 1) / 2; // remove all tuples where P < Q
 
         if (c > 1e9) {
             return -1;
