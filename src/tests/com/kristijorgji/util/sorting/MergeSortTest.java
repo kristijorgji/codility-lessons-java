@@ -16,6 +16,13 @@ public class MergeSortTest {
         assertArrayEquals(expectedArray, t);
     }
 
+    @ParameterizedTest
+    @MethodSource("dataProvider")
+    public void testInPlaceSolution(int[] A, final int[] expectedArray) {
+        MergeSort.inPlaceSort(A, 0, A.length);
+        assertArrayEquals(expectedArray, A);
+    }
+
     private static Stream<Arguments> dataProvider() {
         return Stream.of(
                 Arguments.of(
@@ -24,6 +31,14 @@ public class MergeSortTest {
                         },
                         new int[] {
                                 -3, -2, 1, 2, 5, 6
+                        }
+                ),
+                Arguments.of(
+                        new int[] {
+                                1, 1, 1, 2, 1, 1
+                        },
+                        new int[] {
+                                1, 1, 1, 1, 1,  2
                         }
                 ),
                 Arguments.of(
